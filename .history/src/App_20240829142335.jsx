@@ -56,6 +56,9 @@ const Footer = () => (
 )
 
 const CreateNew = ({ addNew, setNotification }) => {
+  // const [content, setContent] = useState('')
+  // const [author, setAuthor] = useState('')
+  // const [info, setInfo] = useState('')
   const content = useField('text')
   const author = useField('text')
   const info = useField('text')
@@ -69,37 +72,31 @@ const CreateNew = ({ addNew, setNotification }) => {
       info: info.vaulue,
       votes: 0
     })
-    setNotification(`A new anecdote "${content.value}" created!`)
+    setNotification(`A new anecdote "${content}" created!`)
     navigate('/')
 
     setTimeout(() => {
       setNotification('')
     }, 5000)
   }
-  const handleReset = (e) => {
-    e.preventDefault()
-    content.reset()
-    author.reset()
-    info.reset()
-  }
+
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input name='content' type={content.type} value={content.value} onChange={content.onChange} />
+          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
         </div>
         <div>
           author
-          <input name='author' type={author.type} value={author.value} onChange={author.onChange} />
+          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
         </div>
         <div>
           url for more info
-          <input name='info'  type={info.type} value={info.value} onChange={info.onChange} />
+          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
         </div>
         <button>create</button>
-        <button onClick={handleReset}>reset</button>
       </form>
     </div>
   )
